@@ -1,7 +1,7 @@
 --liquibase formatted sql
 --changeset filip:1
 create table USERS (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username varchar(20) not null UNIQUE,
     name varchar(20) not null,
     surname varchar(20) not null,

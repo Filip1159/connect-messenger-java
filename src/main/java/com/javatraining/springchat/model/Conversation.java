@@ -1,19 +1,24 @@
 package com.javatraining.springchat.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Getter
+@Setter
 public class Conversation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private long user1Id, user2Id;
+    private long conversationId;
 
     @OneToMany
-    @JoinColumn(name = "conversationId", updatable = false, insertable = false)
+    @JoinColumn(name = "messageId")
     private List<Message> messages;
+
+    @OneToMany
+    @JoinColumn(name = "participantId")
+    private List<Participant> participants;
 }

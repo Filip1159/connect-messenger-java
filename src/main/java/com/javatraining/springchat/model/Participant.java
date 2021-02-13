@@ -8,12 +8,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-public class Message {
+public class Participant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long messageId;
-    private long conversationId;
+    private long participantId;
+
     private long userId;
-    private String sender, text;
-    private boolean read;
+    private long conversationId;
 }
