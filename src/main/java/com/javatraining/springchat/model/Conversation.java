@@ -5,15 +5,15 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.util.List;
 
-@Getter
 @Entity
-public class User {
+@Getter
+public class Conversation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String username, name, surname, password;
+    private long user1Id, user2Id;
 
     @OneToMany
-    @JoinColumn(name = "user1Id")
-    private List<Conversation> conversations;
+    @JoinColumn(name = "conversationId", updatable = false, insertable = false)
+    private List<Message> messages;
 }
