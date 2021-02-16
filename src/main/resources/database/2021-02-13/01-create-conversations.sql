@@ -1,6 +1,6 @@
 --liquibase formatted sql
 --changeset filip:4
-create table conversations
+create table conversation
 (
     conversation_id BIGINT AUTO_INCREMENT PRIMARY KEY
 )

@@ -14,6 +14,6 @@ public class Message {
     private long messageId;
     private long conversationId;
     private long userId;
-    private String sender, text;
-    private boolean read;
+    private String content;
+    private boolean wasRead;
 }

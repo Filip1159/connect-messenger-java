@@ -50,6 +50,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                     .getSubject();
             if (userName != null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+                /* TODO error is here */
                 return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
             }
         }

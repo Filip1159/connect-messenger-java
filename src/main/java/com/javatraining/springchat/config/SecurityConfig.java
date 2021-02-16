@@ -1,14 +1,18 @@
 package com.javatraining.springchat.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javatraining.springchat.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
@@ -16,6 +20,7 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import javax.sql.DataSource;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
@@ -35,9 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource)
+        /*auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("SELECT username, password, 'true' FROM users WHERE username=?")
-                .authoritiesByUsernameQuery("SELECT username, 'USER' FROM authorities WHERE username=?");
+                .authoritiesByUsernameQuery("SELECT username, 'USER' FROM authorities WHERE username=?");*/
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Override
@@ -55,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(authenticationFilter())
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(), userDetailsManager(), secret))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), userDetailsService(), secret))
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and().headers().frameOptions().disable();
@@ -70,7 +76,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public UserDetailsManager userDetailsManager() {
-        return new JdbcUserDetailsManager(dataSource);
+    public UserDetailsService userDetailsService() {
+        return new MyUserDetailsService();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        return authProvider;
     }
 }
