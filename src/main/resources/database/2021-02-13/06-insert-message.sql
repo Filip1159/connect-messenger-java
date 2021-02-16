@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset filip:1
+--changeset filip:8
 insert into message (message_id, conversation_id, user_id, content, was_read) values
         (1, 3, 4, 'Hey John, whats up?', false),  --grace01 to mrsmith
         (2, 5, 4, 'Czesc Jan, co tam?', true),  --grace01 to janek007

@@ -18,13 +18,13 @@ public class ConversationController {
     private final ConversationService conversationService;
 
     @GetMapping("/conversations")
-    public Conversation getConversations(
-            @RequestParam long conversationId,
+    public List<Conversation> getConversations(
+            @RequestParam long userId,
             @AuthenticationPrincipal UsernamePasswordAuthenticationToken token
     ) {
         //String username = token.getName();
         //String s2 = token.toString();
         //System.out.println(username != null ? username : "nUlL" + s2 != null ? s2 : "nUlL");
-        return conversationService.getConversationById(conversationId);
+        return conversationService.getConversationsByUserId(userId);
     }
 }

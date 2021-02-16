@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset filip:5
+--changeset filip:4
 create table participant (
     participant_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,

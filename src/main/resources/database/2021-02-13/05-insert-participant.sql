@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset filip:8
+--changeset filip:7
 insert into participant(participant_id, user_id, conversation_id) values
             (1, 1, 1), (2, 2, 1), --janek007 and ewa-nowak in conversation 1
             (3, 1, 2), (4, 3, 2), --janek007 and mrsmith in conversation 2

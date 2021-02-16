@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset filip:6
+--changeset filip:5
 create table message (
     message_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     conversation_id BIGINT NOT NULL,

@@ -17,10 +17,10 @@ import java.util.Date;
 @Component
 public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final int expirationTime;
+    private final long expirationTime;
     private final String secret;
 
-    public RestAuthenticationSuccessHandler(@Value("${custom.jwt-expiration-time}") int expirationTime,
+    public RestAuthenticationSuccessHandler(@Value("${custom.jwt-expiration-time}") long expirationTime,
                                             @Value("${custom.secret}") String secret) {
         this.expirationTime = expirationTime;
         this.secret = secret;
