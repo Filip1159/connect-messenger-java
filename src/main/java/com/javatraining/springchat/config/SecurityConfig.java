@@ -34,11 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/v2/api-docs").permitAll()
-                .antMatchers("/webjars/**").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/swagger-ui.html", "/v2/api-docs", "/h2-console/**").permitAll()
+                .antMatchers("/webjars/**", "/swagger-resources/**").permitAll()
+                .antMatchers("/conversations/**", "/user/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -48,6 +46,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and().headers().frameOptions().disable();
+        http
+                .formLogin()
+                .loginPage("/html/login.html")
+                .permitAll();
     }
 
     private JsonObjectAuthenticationFilter authenticationFilter() throws Exception {

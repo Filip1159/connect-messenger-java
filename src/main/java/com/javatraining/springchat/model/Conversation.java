@@ -14,11 +14,27 @@ public class Conversation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long conversationId;
 
-    @OneToMany
-    @JoinColumn(name = "messageId")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "message_id")
     private List<Message> messages;
 
-    @OneToMany
-    @JoinColumn(name = "participantId")
-    private List<Participant> participants;
+    @ManyToMany(mappedBy = "conversations")
+    List<User> users;
+
+    @Override
+    public String toString() {
+        return "Conversation{" +
+                "conversationId=" + conversationId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(o instanceof Conversation) {
+            Conversation c = (Conversation) o;
+            return c.conversationId == conversationId;
+        }
+        return false;
+    }
 }

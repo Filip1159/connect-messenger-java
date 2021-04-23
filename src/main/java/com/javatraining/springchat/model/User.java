@@ -15,11 +15,20 @@ public class User {
     private long userId;
     private String username, name, surname, password;
 
-    @OneToMany
-    @JoinColumn(name = "participantId")
-    private List<Participant> participants;
+    @ManyToMany
+    @JoinTable(
+            name = "participant",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "conversation_id"))
+    private List<Conversation> conversations;
 
-    @OneToMany
-    @JoinColumn(name = "messageId")
-    private List<Message> messages;
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
+    }
 }
