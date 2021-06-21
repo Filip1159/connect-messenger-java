@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class UserDTO {
-    private long userId;
-    private String name, surname, username;
+    private final long userId;
+    private final String name, surname, username;
 }

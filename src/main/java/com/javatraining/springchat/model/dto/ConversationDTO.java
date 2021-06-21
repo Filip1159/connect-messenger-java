@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Builder
 public class ConversationDTO {
-    private long conversationId;
-    private List<Message> messages;
-    private List<UserDTO> users;
+    private final long conversationId;
+    private final List<Message> messages;
+    private final List<UserDTO> users;
 }

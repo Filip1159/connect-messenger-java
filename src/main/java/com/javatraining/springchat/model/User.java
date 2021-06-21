@@ -19,7 +19,8 @@ public class User {
     @JoinTable(
             name = "participant",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "conversation_id"))
+            inverseJoinColumns = @JoinColumn(name = "conversation_id")
+    )
     private List<Conversation> conversations;
 
     @Override

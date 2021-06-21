@@ -5,24 +5,19 @@ import com.javatraining.springchat.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/message")
 @RequiredArgsConstructor
 public class MessageController {
     private final MessageService messageService;
-    @GetMapping("/message/{id}")
+    @GetMapping("/{id}")
     public Message getMessageById(@PathVariable long id) {
         return messageService.getMessageById(id);
     }
 
-    @PostMapping("/message")
+    @PostMapping("")
     public Message addMessage(@RequestBody Message message) {
         return messageService.addMessage(message);
-    }
-
-    @GetMapping("/conversation/messages/{id}")
-    public List<Message> getMessagesByConversationId(@PathVariable long id) {
-        return messageService.getMessagesByConversationId(id);
     }
 }

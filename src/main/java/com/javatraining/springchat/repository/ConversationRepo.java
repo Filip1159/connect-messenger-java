@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ConversationRepository extends JpaRepository<Conversation, Long> {
-    Conversation getConversationByConversationId(long conversationId);
-    List<Conversation> findConversationsByConversationIdIn(List<Long> ids);
+public interface ConversationRepo extends JpaRepository<Conversation, Long> {
     List<Conversation> findConversationsByUsersContaining(User user);
 }

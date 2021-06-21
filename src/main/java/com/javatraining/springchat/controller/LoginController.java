@@ -1,15 +1,15 @@
 package com.javatraining.springchat.controller;
 
 import com.javatraining.springchat.config.LoginCredentials;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/login")
+@CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
 
-    @PostMapping("/login")
+    @PostMapping("")
     public void login(@RequestBody LoginCredentials credentials) {
-
+        System.out.println("Called login method");
     }
 }

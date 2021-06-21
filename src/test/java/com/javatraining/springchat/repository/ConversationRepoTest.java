@@ -11,21 +11,18 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
-class ConversationRepositoryTest {
+class ConversationRepoTest {
     @Autowired
-    private ConversationRepository conversationRepository;
+    private ConversationRepo conversationRepo;
 
     @Test
     public void shouldReturnJanekConversations() {
         User u = new User();
         u.setUserId(1);
-        u.setUsername("janek007");
-        u.setName("Jan");
-        u.setSurname("Kowalski");
-        List<Conversation> convs = conversationRepository.findConversationsByUsersContaining(u);
+        List<Conversation> convs = conversationRepo.findConversationsByUsersContaining(u);
         assertThat(convs.size()).isEqualTo(3);
-        assertThat(convs.get(0).getMessages().get(0).getContent()).isEqualTo("Hey John, whats up?");
-        assertThat(convs.get(1).getMessages().get(0).getContent()).isEqualTo("Czesc Jan, co tam?");
+        assertThat(convs.get(0).getMessages().get(0).getContent()).isEqualTo("Hej Ewa, pożycz dwie dychy do jutra");
+        assertThat(convs.get(1).getMessages().get(1).getContent()).isEqualTo("W nastepny czwartek");
     }
 
 }

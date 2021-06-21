@@ -15,7 +15,7 @@ public class Conversation {
     private long conversationId;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "message_id")
+    @JoinColumn(name = "conversationId")
     private List<Message> messages;
 
     @ManyToMany(mappedBy = "conversations")
