@@ -4,7 +4,7 @@ import springchat.model.Conversation;
 import springchat.model.User;
 import springchat.model.dto.ConversationDTO;
 import springchat.model.dto.ConversationDtoMapper;
-import springchat.repository.ConversationRepo;
+import springchat.repo.ConversationRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

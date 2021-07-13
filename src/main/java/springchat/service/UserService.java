@@ -1,7 +1,7 @@
 package springchat.service;
 
 import springchat.model.User;
-import springchat.repository.UserRepo;
+import springchat.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

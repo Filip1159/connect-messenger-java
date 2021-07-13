@@ -1,13 +1,14 @@
 package springchat.service;
 
-import springchat.model.Message;
-import springchat.repository.MessageRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import springchat.model.Message;
+import springchat.repo.MessageRepo;
 
 @Service
 @RequiredArgsConstructor
 public class MessageService {
+
     private final MessageRepo messageRepo;
 
     public Message getMessageById(long id) {

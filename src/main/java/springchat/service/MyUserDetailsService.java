@@ -2,7 +2,7 @@ package springchat.service;
 
 import springchat.config.MyUserDetails;
 import springchat.model.User;
-import springchat.repository.UserRepo;
+import springchat.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

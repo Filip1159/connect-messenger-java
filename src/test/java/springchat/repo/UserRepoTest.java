@@ -1,4 +1,4 @@
-package springchat.repository;
+package springchat.repo;
 
 import springchat.model.User;
 import org.junit.jupiter.api.Test;

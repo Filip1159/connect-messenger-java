@@ -1,4 +1,4 @@
-package springchat.repository;
+package springchat.repo;
 
 import springchat.model.Message;
 import org.springframework.data.jpa.repository.JpaRepository;

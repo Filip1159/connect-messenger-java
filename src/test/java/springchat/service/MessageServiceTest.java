@@ -1,7 +1,7 @@
 package springchat.service;
 
 import springchat.model.Message;
-import springchat.repository.MessageRepo;
+import springchat.repo.MessageRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

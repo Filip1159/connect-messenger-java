@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/swagger-ui.html", "/v2/api-docs", "/h2-console/**").permitAll()
                 .antMatchers("/webjars/**", "/swagger-resources/**").permitAll()
-                .antMatchers().permitAll()
+                .antMatchers("/message", "/chat/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .cors().configurationSource(corsConfigurationSource())
