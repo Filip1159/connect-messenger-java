@@ -1,6 +1,6 @@
 package springchat.config;
 
-import springchat.service.MyUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +19,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import springchat.repo.UserRepo;
+import springchat.service.MyUserDetailsService;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,12 +32,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final RestAuthenticationSuccessHandler successHandler;
     private final RestAuthenticationFailureHandler failureHandler;
     private final String secret;
+    private final UserRepo userRepo;
 
+    @Autowired
     public SecurityConfig(RestAuthenticationSuccessHandler successHandler,
-                          RestAuthenticationFailureHandler failureHandler, @Value("${custom.secret}") String secret) {
+                          RestAuthenticationFailureHandler failureHandler,
+                          @Value("${custom.secret}") String secret,
+                          UserRepo userRepo) {
         this.successHandler = successHandler;
         this.failureHandler = failureHandler;
         this.secret = secret;
+        this.userRepo = userRepo;
     }
 
     @Bean
@@ -60,7 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/swagger-ui.html", "/v2/api-docs", "/h2-console/**").permitAll()
                 .antMatchers("/webjars/**", "/swagger-resources/**").permitAll()
-                .antMatchers("/message", "/chat/**").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/websocket/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .cors().configurationSource(corsConfigurationSource())
@@ -96,8 +104,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    @Override
     protected UserDetailsService userDetailsService() {
-        return new MyUserDetailsService();
+        return new MyUserDetailsService(userRepo);
     }
 
     @Bean

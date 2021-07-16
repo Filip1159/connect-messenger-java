@@ -11,8 +11,8 @@ public class MessageService {
 
     private final MessageRepo messageRepo;
 
-    public Message getMessageById(long id) {
-        return messageRepo.getMessageByMessageId(id);
+    public Message getMessageById(Long id) {
+        return messageRepo.getMessageById(id);
     }
 
     public Message addMessage(Message message) {

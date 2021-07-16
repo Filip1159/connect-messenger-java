@@ -5,11 +5,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/login")
-@CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
 
-    @PostMapping("")
+    @PostMapping
     public void login(@RequestBody LoginCredentials credentials) {
-        System.out.println("Called login method");
     }
 }

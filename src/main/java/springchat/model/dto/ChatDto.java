@@ -3,15 +3,15 @@ package springchat.model.dto;
 import springchat.model.Message;
 import lombok.Builder;
 import lombok.Getter;
-import springchat.model.SeenMap;
+import springchat.model.Status;
 
 import java.util.List;
 
 @Getter
 @Builder
-public class ConversationDTO {
-    private final long conversationId;
+public class ChatDto {
+    private final Long id;
     private final List<Message> messages;
-    private final List<UserDTO> users;
-    private final List<SeenMap> seenMapList;
+    private final List<UserDto> users;
+    private final List<Status> status;  // statuses ???
 }

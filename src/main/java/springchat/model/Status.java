@@ -13,13 +13,10 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @EqualsAndHashCode
-@Table(name = "messages")
-public class Message {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long chatId;
-    private Long userId;
-    private LocalDateTime time;
-    private String content;
+@Table(name = "status")
+public class Status {
+    @EmbeddedId
+    private StatusEmbeddedId id;
+    private Long messageId;  // last displayed message
+    private LocalDateTime time;  // when last message was displayed first time
 }

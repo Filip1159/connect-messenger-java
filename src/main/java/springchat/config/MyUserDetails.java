@@ -10,7 +10,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class MyUserDetails implements UserDetails {
-    private User user;
+
+    private final User user;
 
     public MyUserDetails(User user) {
         this.user = user;
@@ -33,9 +34,17 @@ public class MyUserDetails implements UserDetails {
         return user.getUsername();
     }
 
-    public long getUserId() { return user.getUserId(); }
-    public String getName() { return user.getName(); }
-    public String getSurname() { return user.getSurname(); }
+    public Long getUserId() {
+        return user.getId();
+    }
+
+    public String getName() {
+        return user.getName();
+    }
+
+    public String getSurname() {
+        return user.getSurname();
+    }
 
     @Override
     public boolean isAccountNonExpired() {

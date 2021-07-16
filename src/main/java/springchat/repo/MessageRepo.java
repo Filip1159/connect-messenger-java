@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MessageRepo extends JpaRepository<Message, Long> {
-    Message getMessageByMessageId(long id);
+    Message getMessageById(long id);
 }
