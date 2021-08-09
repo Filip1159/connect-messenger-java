@@ -20,7 +20,8 @@ public class MessageController {
 
     @PostMapping("/message")
     public Message postMessage(@RequestBody Message message) {
-        template.convertAndSend("/topic/messages/" + message.getChatId(), message);
-        return messageService.addMessage(message);
+        Message added = messageService.addMessage(message);
+        template.convertAndSend("/topic/messages/" + added.getChatId(), added);
+        return added;
     }
 }

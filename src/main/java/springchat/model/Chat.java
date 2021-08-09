@@ -20,13 +20,13 @@ public class Chat {
     private Long id;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "chat_id")
+    @JoinColumn(name = "chatId")
     private List<Message> messages;
 
     @ManyToMany(mappedBy = "chats")
     List<User> users;
 
     @OneToMany
-    @JoinColumn(name = "chat_id")
+    @JoinColumn(name = "chatId")
     List<Status> status;
 }

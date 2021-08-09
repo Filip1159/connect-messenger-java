@@ -10,7 +10,7 @@ insert into status (user_id, chat_id, message_id, time) values
 (1, 1, 1, '2021-07-07T22:24:59'), (2, 1, 3, '2021-07-07T22:24:59'), -- janek007 and ewa-nowak in conversation 1
 (1, 2, 13, '2021-07-07T22:24:59'), (3, 2, 12, '2021-07-07T22:24:59'), -- janek007 and mrsmith in conversation 2
 (4, 3, 18, '2021-07-07T22:24:59'), (3, 3, 19, '2021-07-07T22:24:59'), -- grace01 and mrsmith in conversation 3
-(1, 4, 24, '2021-07-07T22:24:59'), (4, 4, 25, '2021-07-07T22:24:59'); -- janek007 and grace01 in conversation 5
+(1, 4, 24, '2021-07-07T22:24:59'), (4, 4, 25, '2021-07-07T22:24:59'); -- janek007 and grace01 in conversation 4
 
 insert into messages (id, chat_id, user_id, time, content) values
 (1, 1, 1, '2021-07-07T22:23:29', 'Dzięki za książkę. Przeczytałem dziś prawie sto stron. Myślałem, że się od niej nie oderwę przez całą noc! :O'), -- janek007 to ewa-nowak
