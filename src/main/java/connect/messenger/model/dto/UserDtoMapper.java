@@ -1,0 +1,24 @@
+package connect.messenger.model.dto;
+
+import connect.messenger.model.User;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class UserDtoMapper {
+    private UserDtoMapper() {}
+    public static List<UserDto> mapToUserDtos(List<User> users) {
+        return users.stream()
+                .map(UserDtoMapper::mapToUserDto)
+                .collect(Collectors.toList());
+    }
+
+    private static UserDto mapToUserDto(User u) {
+        return UserDto.builder()
+                .id(u.getId())
+                .name(u.getName())
+                .surname(u.getSurname())
+                .username(u.getUsername())
+                .build();
+    }
+}
