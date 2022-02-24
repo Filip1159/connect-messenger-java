@@ -1,5 +1,6 @@
 package connect.messenger.config;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,9 +22,9 @@ import connect.messenger.repo.UserRepo;
 import connect.messenger.service.UserService;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Configuration
+@EnableEncryptableProperties
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
