@@ -1,9 +1,7 @@
 package connect.messenger.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +11,9 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @EqualsAndHashCode
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "messages")
 public class Message {
     @Id
@@ -20,6 +21,12 @@ public class Message {
     private Long id;
     private Long chatId;
     private Long userId;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime time;
+
+    private MessageType type;
+
+    @Column(length = 1000)
     private String content;
 }
