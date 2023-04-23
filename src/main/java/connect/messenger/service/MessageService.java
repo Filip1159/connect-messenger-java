@@ -1,20 +1,19 @@
 package connect.messenger.service;
 
+import connect.messenger.model.Message;
+import connect.messenger.model.MessageType;
 import connect.messenger.model.dto.CreateMessageRequest;
+import connect.messenger.repo.MessageRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import connect.messenger.model.Message;
-import connect.messenger.repo.MessageRepo;
 
 import javax.transaction.Transactional;
-import java.io.*;
 
 @Service
 @RequiredArgsConstructor
 public class MessageService {
-    private static final String imageUploadFolder = "C:\\Users\\fwisn\\IdeaProjects\\connect-messenger-java\\src\\main\\resources\\static\\images\\";
-
     private final MessageRepo messageRepo;
+    private final AwsS3Client s3Client;
 
     public Message getMessageById(Long id) {
         return messageRepo.getMessageById(id);
@@ -31,29 +30,19 @@ public class MessageService {
                 .build();
         var savedMessage = messageRepo.save(messageEntity);
 
-        var originalFileExtension = message.fileContent().getOriginalFilename().split("[.]")[1];
-        var newFileName = message.chatId() + "_" + savedMessage.getId() + "." + originalFileExtension;
-        var newFilePath = imageUploadFolder + newFileName;
-
-        var imageFile = new File(newFilePath);
-
-        try (var inputStream = message.fileContent().getInputStream();
-             var outputStream = new FileOutputStream(imageFile)) {
-            if (!imageFile.exists()) imageFile.createNewFile();
-            int read;
-            byte[] bytes = new byte[1024];
-
-            while ((read = inputStream.read(bytes)) != -1) {
-                outputStream.write(bytes, 0, read);
-            }
-        } catch (IOException e) {
-        }
-
-        var messageContent = switch (message.type()) {
-            case TEXT -> message.textContent();
-            case FILE -> "/images/" + newFileName;
-        };
+        var messageContent = getMessageContent(message, savedMessage.getId());
         savedMessage.setContent(messageContent);
         return messageRepo.save(savedMessage);
+    }
+
+    public String getMessageContent(CreateMessageRequest message, Long savedMessageId) {
+        if (message.type().equals(MessageType.FILE)) {
+            var originalFileExtension = message.fileContent().getOriginalFilename().split("[.]")[1];
+            var newFileName = message.chatId() + "_" + savedMessageId + "." + originalFileExtension;
+            s3Client.putFile(newFileName, message.fileContent());
+            return newFileName;
+        } else {
+            return message.textContent();
+        }
     }
 }

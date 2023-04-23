@@ -25,6 +25,7 @@ public class Message {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime time;
 
+    @Enumerated(EnumType.STRING)
     private MessageType type;
 
     @Column(length = 1000)
