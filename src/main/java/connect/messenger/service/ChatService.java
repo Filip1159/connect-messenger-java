@@ -55,7 +55,10 @@ public class ChatService {
                                 .build())
                         .build())
                 .toList();
+
         statusRepo.saveAll(newStatuses);
-        return ChatDtoMapper.mapToChatDto(chatRepo.findById(savedChat.getId()).orElseThrow());
+        savedChat.setStatus(newStatuses);
+
+        return ChatDtoMapper.mapToChatDto(savedChat);
     }
 }
