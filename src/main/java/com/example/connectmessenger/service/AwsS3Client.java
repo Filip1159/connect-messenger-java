@@ -11,10 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-import static org.springframework.http.MediaType.IMAGE_JPEG;
-import static org.springframework.http.MediaType.IMAGE_PNG;
-import static org.springframework.http.MediaType.IMAGE_GIF;
-
 @Component
 @RequiredArgsConstructor
 public class AwsS3Client {
@@ -24,7 +20,7 @@ public class AwsS3Client {
         if (multipartFile.isEmpty()) {
             throw new IllegalStateException("Cannot upload empty file");
         }
-        if (!List.of(IMAGE_JPEG.getType(), IMAGE_PNG.getType(), IMAGE_GIF.getType()).contains(multipartFile.getContentType())) {
+        if (!List.of("image/jpeg", "image/png", "image/gif").contains(multipartFile.getContentType())) {
             throw new IllegalStateException("File must be an image");
         }
 
